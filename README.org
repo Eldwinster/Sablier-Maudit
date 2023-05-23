@@ -1,0 +1,39 @@
+#+title: Le Sablier Maudit
+#+description:
+#+created: [2023-05-23 Tue 14:38]
+#+last_modified: [2023-05-23 Tue 14:50]
+
+* Le Sablier Maudit
+
+This is a running game where a timer is set to a specific total time.
+Each time the timer reach its end, the total time is reduce by a certain amount of time.
+Finally, this loop is followed until it reaches its end which is set at the start of the game.
+
+** Example
+Lets set the total time to 30min where the loop will run 9 times with a 1min
+decrease to the total time between each loop.
+
+*** Loop example
+Let T_0 be the total time, T_n each new total time (where n is an integer), and
+l be the number of time the loop will be run.
+
+- First loop
+  + T_0 = 30min
+  + L = 1
+- Second Loop
+  + T_1 = 29min
+  + L = 2
+- Ninth Loop
+  + T_9 = 21min
+  + L = 9
+- END GAME
+* Challenge
+As you can see this is a pretty basic game nothing special there. However as a
+tinker with some knowledge about programming. The challenge for me will be to
+code this using an GUI library. Indeed, this project has been asked to me by
+someone. This person isn't a Super User so I have to simplify the use of this
+piece of code as much as I can.
+
+It will be fun learning about GUI programming.
+
+Hope in and let sail together.
