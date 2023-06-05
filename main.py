@@ -1,46 +1,48 @@
 #!/usr/bin/env python3
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 
 # main window
-root = Tk()
+root = tk.Tk()
 root.title('Sablier Maudit')
+
+# firstWindow = tk.Toplevel(root)
 
 # Create a frame and configure its grid
 paramFrame = ttk.Frame(root, padding='3 3 12 12')
-paramFrame.grid(row=0, column=0, sticky=(N, W, E, S))
+paramFrame.grid(row=0, column=0)
 # root.rowconfigure(3, weight=1)
 # root.columnconfigure(4, weight=1)
 
-# Total time
+# Layout of the root window
 timelbl = ttk.Label(paramFrame, text='Temps de départ : ')
 timelbl.grid(row=10, column=1)
 
-hourVar = StringVar()
+hourVar = tk.StringVar()
 hourEntry = ttk.Entry(paramFrame, textvariable=hourVar, width=3)
 hourEntry.grid(row=10, column=10)
 
 hourlbl = ttk.Label(paramFrame, text="h")
 hourlbl.grid(row=10, column=11)
 
-minVar = StringVar()
+minVar = tk.StringVar()
 minEntry = ttk.Entry(paramFrame, textvariable=minVar, width=3)
-minEntry.grid(row=10, column=20)
+minEntry.grid(row=10, column=12)
 
 minlbl = ttk.Label(paramFrame, text='min')
-minlbl.grid(row=10, column=21)
+minlbl.grid(row=10, column=13)
 
-secVar = StringVar()
+secVar = tk.StringVar()
 secEntry = ttk.Entry(paramFrame, textvariable=secVar, width=3)
-secEntry.grid(row=10, column=30)
+secEntry.grid(row=10, column=14)
 
 seclbl = ttk.Label(paramFrame, text='sec')
-seclbl.grid(row=10, column=31)
+seclbl.grid(row=10, column=15)
 
 incrementlbl = ttk.Label(paramFrame, text='Incrément/Décrément : ')
 incrementlbl.grid(row=20, column=1)
 
-incrementVar = StringVar()
+incrementVar = tk.StringVar()
 incrementEntry = ttk.Entry(paramFrame, textvariable=incrementVar, width=20)
 incrementEntry.grid(row=20, column=10, columnspan=20)
 
@@ -50,8 +52,11 @@ incExampleLabel.grid(row=20, column=32)
 looplbl = ttk.Label(paramFrame, text='Nombre de tours : ')
 looplbl.grid(row=30, column=1)
 
-loopVar = StringVar()
+loopVar = tk.StringVar()
 loopEntry = ttk.Entry(paramFrame, textvariable=loopVar, width=20)
 loopEntry.grid(row=30, column=10, columnspan=20)
+
+# button
+ttk.Button(root, text="Close", command=root.quit())
 
 root.mainloop()
