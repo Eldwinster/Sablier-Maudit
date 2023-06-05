@@ -57,6 +57,10 @@ loopEntry = ttk.Entry(paramFrame, textvariable=loopVar, width=20)
 loopEntry.grid(row=30, column=10, columnspan=20)
 
 # button
-ttk.Button(root, text="Close", command=root.quit())
+closeButton = ttk.Button(paramFrame, text="Close", command=lambda: root.quit())
+closeButton.grid(row=40, column=1)
+
+applyButton = ttk.Button(paramFrame, text="Apply")
+applyButton.grid(row=40, column=100)
 
 root.mainloop()
