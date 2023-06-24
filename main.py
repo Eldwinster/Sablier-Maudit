@@ -3,92 +3,140 @@ import tkinter as tk
 from tkinter import ttk
 import time
 
+WELCOME_TEXT = """
+Bienvenue au jeu du Sablier Maudit.
 
-def countdown():
-    try:
-        tmp = int(hourVar.get()) * 3600 + int(minVar.get()) * 60 + int(secVar.get())
-        initial_timer = tmp
-    except:
-        print("Please input the right value")
-    while initial_timer > 0:
-        mins, secs = divmod(tmp, 60)
-        hours = 0
-        if mins > 60:
-            hours, mins = divmod(mins, 60)
-        hourVar.set("{0:2d}".format(hours))
-        minVar.set("{0:2d}".format(mins))
-        secVar.set("{0:2d}".format(secs))
-        root.update()
-        time.sleep(1)
-        if (tmp == 0):
-            initial_timer -= 10
-            tmp = initial_timer
-        tmp -= 1
-        if (initial_timer == 0):
-            tk.messagebox.showinfo("Timer: ", "Time's up")
+Voici en quoi ce jeu consiste:
 
-# main window
-root = tk.Tk()
-root.title('Sablier Maudit')
+On commence par choisir un temps total pour effectuer un premier tour.
+Chaque participant doit finir son tour avant que le sablier ne termine de s'écouler.
+"""
 
-# Create a frame and configure its grid
-paramFrame = ttk.Frame(root, padding='3 3 12 12')
-paramFrame.grid(row=0, column=0)
-# root.rowconfigure(3, weight=1)
-# root.columnconfigure(4, weight=1)
 
-# Layout of the root window
-timelbl = ttk.Label(paramFrame, text='Temps de départ : ')
-timelbl.grid(row=10, column=1)
+class tkinterApp(tk.Tk):
 
-hourVar = tk.StringVar()
-hourVar.set('00')
-hourEntry = ttk.Entry(paramFrame, textvariable=hourVar, width=3)
-hourEntry.grid(row=10, column=10)
+    # __init__ function for class tkinterApp
+    def __init__(self, *args, **kwargs):
 
-hourlbl = ttk.Label(paramFrame, text="h")
-hourlbl.grid(row=10, column=11)
+        # __init__ function for class Tk
+        tk.Tk.__init__(self, *args, **kwargs)
 
-minVar = tk.StringVar()
-minVar.set('00')
-minEntry = ttk.Entry(paramFrame, textvariable=minVar, width=3)
-minEntry.grid(row=10, column=12)
+        # creating a container
+        container = tk.Frame(self)
+        container.pack(side = "top", fill = "both", expand = True)
 
-minlbl = ttk.Label(paramFrame, text='min')
-minlbl.grid(row=10, column=13)
+        container.grid_rowconfigure(0, weight = 1)
+        container.grid_columnconfigure(0, weight = 1)
 
-secVar = tk.StringVar()
-secVar.set('00')
-secEntry = ttk.Entry(paramFrame, textvariable=secVar, width=3)
-secEntry.grid(row=10, column=14)
+        # initializing frames to an empty array
+        self.frames = {}
 
-seclbl = ttk.Label(paramFrame, text='sec')
-seclbl.grid(row=10, column=15)
+        # iterating through a tuple consisting
+        # of the different page layouts
+        for F in (WelcomePage, SettingsPage, CountdownPage):
 
-incrementlbl = ttk.Label(paramFrame, text='Incrément/Décrément : ')
-incrementlbl.grid(row=20, column=1)
+            frame = F(container, self)
 
-incrementVar = tk.StringVar()
-incrementVar.set('00')
-incrementEntry = ttk.Entry(paramFrame, textvariable=incrementVar, width=20)
-incrementEntry.grid(row=20, column=10, columnspan=20)
+            # initializing frame of that object from
+            # startpage, page1, page2 respectively with
+            # for loop
+            self.frames[F] = frame
 
-incExampleLabel = ttk.Label(paramFrame, text="-1s, -1m, +1h, etc")
-incExampleLabel.grid(row=20, column=32)
+            frame.grid(row = 0, column = 0, sticky ="nsew")
 
-looplbl = ttk.Label(paramFrame, text='Nombre de tours : ')
-looplbl.grid(row=30, column=1)
+        self.show_frame(WelcomePage)
 
-loopVar = tk.StringVar()
-loopVar.set('00')
-loopEntry = ttk.Entry(paramFrame, textvariable=loopVar, width=20)
-loopEntry.grid(row=30, column=10, columnspan=20)
+    # to display the current frame passed as
+    # parameter
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.tkraise()
 
-# button
-closeButton = ttk.Button(paramFrame, text="Close", command=lambda: root.quit())
-closeButton.grid(row=40, column=1)
+# first window frame startpage
 
-applyButton = ttk.Button(paramFrame, text="Apply", command=countdown)
-applyButton.grid(row=40, column=100)
+class WelcomePage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
 
-root.mainloop()
+        # label of frame Layout 2
+        label = ttk.Label(self, text=WELCOME_TEXT)
+
+        # putting the grid in its place by using
+        # grid
+        label.grid(row=0, column=4)
+
+        next_button = ttk.Button(self, text="Next",
+                                 command=lambda: controller.show_frame(SettingsPage))
+
+        # putting the button in its place by
+        # using grid
+        next_button.grid(row=1, column=5, padx=10, pady=10)
+
+        # button to show frame 2 with text layout2
+        button2 = ttk.Button(self, text="Quitter",
+                             command=lambda: self.quit())
+
+        # putting the button in its place by
+        # using grid
+        button2.grid(row=1, column=3, padx=10, pady=10)
+
+
+
+
+# second window frame page1
+class SettingsPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+
+        tk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text ="Page 1")
+        label.grid(row = 0, column = 4, padx = 10, pady = 10)
+
+        # button to show frame 2 with text
+        # layout2
+        button1 = ttk.Button(self, text ="StartPage",
+                            command = lambda : controller.show_frame(WelcomePage))
+
+        # putting the button in its place
+        # by using grid
+        button1.grid(row = 1, column = 1, padx = 10, pady = 10)
+
+        # button to show frame 2 with text
+        # layout2
+        button2 = ttk.Button(self, text ="Page 2",
+                            command = lambda : controller.show_frame(CountdownPage))
+
+        # putting the button in its place by
+        # using grid
+        button2.grid(row = 2, column = 1, padx = 10, pady = 10)
+
+
+# third window frame page2
+class CountdownPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text ="Page 2")
+        label.grid(row = 0, column = 4, padx = 10, pady = 10)
+
+        # button to show frame 2 with text
+        # layout2
+        button1 = ttk.Button(self, text ="Page 1",
+                            command = lambda : controller.show_frame(SettingsPage))
+
+        # putting the button in its place by
+        # using grid
+        button1.grid(row = 1, column = 1, padx = 10, pady = 10)
+
+        # button to show frame 3 with text
+        # layout3
+        button2 = ttk.Button(self, text ="Startpage",
+                            command = lambda : controller.show_frame(WelcomePage))
+
+        # putting the button in its place by
+        # using grid
+        button2.grid(row = 2, column = 1, padx = 10, pady = 10)
+
+
+# Driver Code
+app = tkinterApp()
+app.mainloop()
