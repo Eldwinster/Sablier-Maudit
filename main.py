@@ -37,10 +37,10 @@ class tkinterApp(tk.Tk):
 
         # creating a container
         container = tk.Frame(self)
-        container.pack(side = "top", fill = "both", expand = True)
+        container.pack(side="top", fill="both", expand=True)
 
-        container.grid_rowconfigure(0, weight = 1)
-        container.grid_columnconfigure(0, weight = 1)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
         # initializing frames to an empty array
         self.frames = {}
@@ -56,7 +56,7 @@ class tkinterApp(tk.Tk):
             # for loop
             self.frames[F] = frame
 
-            frame.grid(row = 0, column = 0, sticky ="nsew")
+            frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame(WelcomePage)
 
@@ -66,35 +66,30 @@ class tkinterApp(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-# first window frame startpage
 
+# first window frame startpage
 class WelcomePage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        # label of frame Layout 2
-        label = ttk.Label(self, text=WELCOME_TEXT)
+        # Labels
+        welcomeLabel = ttk.Label(self, text=WELCOME_TEXT)
+        rulesLabel = ttk.Label(self, text=RULES_TEXT)
 
-        # putting the grid in its place by using
-        # grid
-        label.grid(row=0, column=4)
+        welcomeLabel.grid(row=0, column=4)
+        rulesLabel.grid(row=1, column=4)
 
-        next_button = ttk.Button(self, text="Next",
+        next_button = ttk.Button(self, text="Suivant",
                                  command=lambda: controller.show_frame(SettingsPage))
 
-        # putting the button in its place by
-        # using grid
-        next_button.grid(row=1, column=5, padx=10, pady=10)
+        next_button.grid(row=10, column=5)
 
-        # button to show frame 2 with text layout2
-        button2 = ttk.Button(self, text="Quitter",
-                             command=lambda: self.quit())
+        quit_button = ttk.Button(self, text="Quitter",
+                                 command=lambda: self.quit())
 
-        # putting the button in its place by
-        # using grid
-        button2.grid(row=1, column=3, padx=10, pady=10)
+        quit_button.grid(row=10, column=3)
 
-
+        padding(self)
 
 
 # second window frame page1
@@ -130,7 +125,7 @@ class CountdownPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         label = ttk.Label(self, text ="Page 2")
-        label.grid(row = 0, column = 4, padx = 10, pady = 10)
+        label.grid(row = 0, column = 4)
 
         # button to show frame 2 with text
         # layout2
@@ -139,7 +134,7 @@ class CountdownPage(tk.Frame):
 
         # putting the button in its place by
         # using grid
-        button1.grid(row = 1, column = 1, padx = 10, pady = 10)
+        button1.grid(row = 1, column = 1)
 
         # button to show frame 3 with text
         # layout3
@@ -148,8 +143,9 @@ class CountdownPage(tk.Frame):
 
         # putting the button in its place by
         # using grid
-        button2.grid(row = 2, column = 1, padx = 10, pady = 10)
+        button2.grid(row = 2, column = 1)
 
+        padding(self)
 
 # Driver Code
 app = tkinterApp()
