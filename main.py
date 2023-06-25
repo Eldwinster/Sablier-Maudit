@@ -92,32 +92,47 @@ class WelcomePage(tk.Frame):
         padding(self)
 
 
-# second window frame page1
 class SettingsPage(tk.Frame):
 
     def __init__(self, parent, controller):
 
         tk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text ="Page 1")
-        label.grid(row = 0, column = 4, padx = 10, pady = 10)
 
-        # button to show frame 2 with text
-        # layout2
-        button1 = ttk.Button(self, text ="StartPage",
-                            command = lambda : controller.show_frame(WelcomePage))
+        # Labels
+        timeLabel = ttk.Label(self, text="Temps initial : ")
+        incrementLabel = ttk.Label(self, text="Incrément/Décrément : ")
+        loopLabel = ttk.Label(self, text="Nombre de tours : ")
 
-        # putting the button in its place
-        # by using grid
-        button1.grid(row = 1, column = 1, padx = 10, pady = 10)
+        # Settings
+        hourVar = tk.IntVar()
+        minVar = tk.IntVar()
+        secVar = tk.IntVar()
+        incrementVar = tk.IntVar()
+        loopVar = tk.IntVar()
 
-        # button to show frame 2 with text
-        # layout2
-        button2 = ttk.Button(self, text ="Page 2",
-                            command = lambda : controller.show_frame(CountdownPage))
+        # Entries
+        hourEntry = ttk.Entry(self, textvariable=hourVar, width=3)
+        minEntry = ttk.Entry(self, textvariable=minVar, width=3)
+        secEntry = ttk.Entry(self, textvariable=secVar, width=3)
+        incrementEntry = ttk.Entry(self, textvariable=incrementVar, width=3)
+        loopEntry = ttk.Entry(self, textvariable=loopVar, width=3)
 
-        # putting the button in its place by
-        # using grid
-        button2.grid(row = 2, column = 1, padx = 10, pady = 10)
+        # Label placement
+        timeLabel.grid(row=0, column=1)
+        incrementLabel.grid(row=1, column=1)
+        loopLabel.grid(row=2, column=1)
+
+        # Entries placement
+        hourEntry.grid(row=0, column=2)
+        minEntry.grid(row=0, column=3)
+        secEntry.grid(row=0, column=4)
+        incrementEntry.grid(row=1, column=2)
+        loopEntry.grid(row=2, column=2)
+
+        quit_button = ttk.Button(self, text="Quitter",
+                                 command=lambda: self.quit())
+        quit_button.grid(row=10, column=0)
+        padding(self)
 
 
 # third window frame page2
