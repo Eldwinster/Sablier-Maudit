@@ -1,16 +1,30 @@
 #!/usr/bin/env python3
 import tkinter as tk
 from tkinter import ttk
-import time
 
 WELCOME_TEXT = """
 Bienvenue au jeu du Sablier Maudit.
+"""
 
+RULES_TEXT = """
 Voici en quoi ce jeu consiste:
 
 On commence par choisir un temps total pour effectuer un premier tour.
-Chaque participant doit finir son tour avant que le sablier ne termine de s'écouler.
+Chaque participant doit finir son tour avant que le sablier ne soit écouler.
+
+À la fin du temps impartie, le sablier est retourné ce qui signifie le début du tour suivant.
+
+Le sablier étant maudit, à chaque tour, perd un peu de son sable.
+
+Plus le sablier se retourne moins vous avez de temps.
+
+Réussirez-vous à battre le sablier ou allez vous succombez sous le poids de sa malédiction ?
 """
+
+
+def padding(frame):
+    for child in frame.winfo_children():
+        child.grid_configure(padx=10, pady=10)
 
 
 class tkinterApp(tk.Tk):
