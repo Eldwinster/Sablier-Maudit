@@ -8,7 +8,7 @@ HOUR = 3600
 MINUTE = 60
 DECREMENT = 10
 
-FONT = ("Arial", 200)
+FONT = ("Arial", 200, "bold")
 
 def countdown():
     paramFrame = ttk.Frame(root, padding='3 3 12 12')
@@ -52,6 +52,13 @@ def countdown():
         #
         root.update()
         time.sleep(1)
+
+        if (tmp == 10):
+            hourLabel.config(foreground="red")
+            sep1Label.config(foreground="red")
+            minLabel.config(foreground="red")
+            sep2Label.config(foreground="red")
+            secLabel.config(foreground="red")
 
         if (tmp == 0):
             initial_timer -= DECREMENT
