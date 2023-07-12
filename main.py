@@ -4,15 +4,18 @@ from tkinter import ttk
 import time
 import datetime
 
+# CONSTANTS
 HOUR = 3600
 MINUTE = 60
 DECREMENT = 1
 
+# VARIABLES
 loop = 9
 hours = 0
 minutes = 0
 seconds = 10
 
+# OPTIONS **kwargs
 NUM_FONT = ("Latin Modern Math", 250, "bold")
 TXT_FONT = ("FiraCode Nerd Font", 150, "")
 PADDING = '0 0 0 0'
@@ -21,11 +24,13 @@ FOREGROUND = 'white'
 
 def countdown():
     global loop
+    # Turn Frame
     turnFrame = ttk.Frame(root, padding=PADDING)
     turnFrame.grid(row=0, column=0)
     turnFrame.columnconfigure(0, weight=1)
     turnFrame.rowconfigure(0, weight=1)
 
+    # Turn Fram Labels
     turnLabel1 = ttk.Label(
         turnFrame,
         text='Tour: ',
@@ -54,11 +59,16 @@ def countdown():
     turnLabel2.grid(row=0, column=1)
     turnLabel3.grid(row=0, column=2)
 
+    # Countdown Frame
+    # it is here because of the variable. (I think?)
     countdownFrame = ttk.Frame(root, padding=PADDING)
     countdownFrame.grid(row=1, column=0)
     countdownFrame.columnconfigure(0, weight=1)
     countdownFrame.rowconfigure(0, weight=1)
 
+    # Countdown Frame Labels
+    # turnLabel = ttk.Label(countdownFrame, textvariable=turnVar, font=FONT)
+    # turnLabel.grid(row=0, column=0)
 
     hourLabel = ttk.Label(
         countdownFrame,
@@ -104,18 +114,21 @@ def countdown():
 
 
     try:
-        tmp = int(hourVar.get()) * HOUR + int(minVar.get()) * MINUTE + int(secVar.get())
-        initial_timer = tmp
+        # Convert total time in seconds
         tempsVariable = int(hourVar.get()) * HOUR + int(minVar.get()) * MINUTE + int(secVar.get())
 
+        # Garde le temps initial en mémoire
         timeMem = tempsVariable
 
+        # Used to apply the decrement on tempsVariable
         timeToDecrement = tempsVariable
 
     except:
         print("Please input the right value")
 
+        # Main loop run until loop == 0
     while loop >= 0:
+        # turnVar.set("{0:2d}".format(loop))
         mins, secs = divmod(tempsVariable, MINUTE)
         hours = 0
 
@@ -174,14 +187,18 @@ def countdown():
 
 # main window
 root = tk.Tk()
+
+# Some fluff
 root.title('Sablier Maudit')
 root.geometry("800x600")
 root.attributes("-fullscreen", True)
 root.resizable(True, True)
 root.configure(background=BACKGROUND)
 
+# It is used to start countdown 100 ms after the program was launched
 root.after(100, countdown)
 
+# Structure the root window as a grid where (0,0) center the frames
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
