@@ -1,0 +1,22 @@
+* Unreleased
+** [2023-07-11 Tue 17:18] A lots of up and downs
+
+[[file:~/Projects/Sablier-Maudit/main.py::import datetime]]
+
+New exp
+
+understand tkinter
+
+understand how to use funciton in tkinter
+
+struggle
+
+Wants to have frame switching
+
+can't ling function and OOP
+
+Forgot the most important
+
+keep things simple
+
+proof of concept
