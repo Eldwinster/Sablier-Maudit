@@ -188,10 +188,17 @@ def countdown():
 # main window
 root = tk.Tk()
 
+WIDTH = root.winfo_screenwidth()
+HEIGHT = root.winfo_screenheight()
+
 # Some fluff
 root.title('Sablier Maudit')
-root.geometry("800x600")
-root.attributes("-fullscreen", True)
+# root.geometry("800x600")
+# Improved the geometry to have a pseudo fullscreen
+# Unable to bind escape to exit fulscreen
+root.geometry('%dx%d+0+0' % (WIDTH, HEIGHT))
+
+# root.attributes("-fullscreen", True)
 root.resizable(True, True)
 root.configure(background=BACKGROUND)
 
@@ -202,6 +209,7 @@ root.after(100, countdown)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
+# Tkinter variables
 hourVar = tk.StringVar()
 minVar = tk.StringVar()
 secVar = tk.StringVar()
