@@ -6,9 +6,18 @@ import datetime
 
 HOUR = 3600
 MINUTE = 60
-DECREMENT = 10
+DECREMENT = 1
 
-FONT = ("Arial", 200, "bold")
+loop = 9
+hours = 0
+minutes = 0
+seconds = 10
+
+NUM_FONT = ("Latin Modern Math", 250, "bold")
+TXT_FONT = ("FiraCode Nerd Font", 150, "")
+PADDING = '0 0 0 0'
+BACKGROUND = 'black'
+FOREGROUND = 'white'
 
 def countdown():
     paramFrame = ttk.Frame(root, padding='3 3 12 12')
