@@ -30,7 +30,7 @@ def countdown():
     turnFrame.columnconfigure(0, weight=1)
     turnFrame.rowconfigure(0, weight=1)
 
-    # Turn Fram Labels
+    # Turn Frame Labels
     turnLabel1 = ttk.Label(
         turnFrame,
         text='Tour: ',
@@ -67,9 +67,6 @@ def countdown():
     countdownFrame.rowconfigure(0, weight=1)
 
     # Countdown Frame Labels
-    # turnLabel = ttk.Label(countdownFrame, textvariable=turnVar, font=FONT)
-    # turnLabel.grid(row=0, column=0)
-
     hourLabel = ttk.Label(
         countdownFrame,
         textvariable=hourVar,
@@ -140,7 +137,7 @@ def countdown():
             lastTurnLabel = ttk.Label(
                 turnFrame,
                 text='Dernier Tour !',
-                font=NUM_FONT,
+                font=TXT_FONT,
                 background=BACKGROUND,
                 foreground='red'
             )
@@ -194,6 +191,7 @@ HEIGHT = root.winfo_screenheight()
 # Some fluff
 root.title('Sablier Maudit')
 # root.geometry("800x600")
+# root.attributes("-fullscreen", True)
 # Improved the geometry to have a pseudo fullscreen
 # Unable to bind escape to exit fulscreen
 root.geometry('%dx%d+0+0' % (WIDTH, HEIGHT))
