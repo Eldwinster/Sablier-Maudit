@@ -18,6 +18,7 @@ seconds = 10
 # OPTIONS **kwargs
 NUM_FONT = ("Latin Modern Math", 250, "bold")
 TXT_FONT = ("FiraCode Nerd Font", 150, "")
+MESSAGE_FONT = ("Arial", 50, "")
 PADDING = '0 0 0 0'
 BACKGROUND = 'black'
 FOREGROUND = 'white'
@@ -125,9 +126,22 @@ def countdown():
 
         # Main loop run until loop == 0
     while loop >= 0:
-        # turnVar.set("{0:2d}".format(loop))
+
         mins, secs = divmod(tempsVariable, MINUTE)
         hours = 0
+
+        if tempsVariable <= 2:
+            hourLabel.config(foreground="red")
+            sep1Label.config(foreground="red")
+            minLabel.config(foreground="red")
+            sep2Label.config(foreground="red")
+            secLabel.config(foreground="red")
+        else:
+            hourLabel.config(foreground=FOREGROUND)
+            sep1Label.config(foreground=FOREGROUND)
+            minLabel.config(foreground=FOREGROUND)
+            sep2Label.config(foreground=FOREGROUND)
+            secLabel.config(foreground=FOREGROUND)
 
         if loop == 1:
             turnLabel1.destroy()
@@ -158,25 +172,39 @@ def countdown():
         root.update()
         time.sleep(1)
 
-        if (tempsVariable == 10):
-            hourLabel.config(foreground="red")
-            sep1Label.config(foreground="red")
-            minLabel.config(foreground="red")
-            sep2Label.config(foreground="red")
-            secLabel.config(foreground="red")
-
-        if (tempsVariable == 0):
+        if tempsVariable == 0:
             timeToDecrement -= DECREMENT
-            # impossible de à mettre freeze le timer
             loop -= 1
             tempsVariable = timeToDecrement
-        if (tempsVariable < 0):
+
+        if tempsVariable < 0:
             tempsVariable = timeMem
 
-        tempsVariable -= 1
 
-        if (loop == 0):
-            tk.messagebox.showinfo("Timer: ", "Time's up")
+        if loop == 0:
+            loop = 0
+
+            time.sleep(2)
+
+            countdownFrame.destroy()
+            turnFrame.destroy()
+
+            messageFrame = ttk.Frame(root, padding=PADDING)
+            messageFrame.grid(row=0, column=0)
+            messageFrame.columnconfigure(0, weight=1)
+            messageFrame.rowconfigure(0, weight=1)
+
+            messageLabel = ttk.Label(
+                messageFrame,
+                text="Bravo à tous !\n\nFélicitation aux survivants !\n\nÀ l'année prochaine !",
+                font=MESSAGE_FONT,
+                background=BACKGROUND,
+                foreground=FOREGROUND,
+            )
+
+            messageLabel.grid(row=0, column=0)
+
+        tempsVariable -= 1
 
     # while tmp_time > 0:
     #     timer = datetime.timedelta(seconds=tmp_time)
