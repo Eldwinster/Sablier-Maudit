@@ -27,7 +27,7 @@ def countdown():
     global loop
     # Turn Frame
     turnFrame = ttk.Frame(root, padding=PADDING)
-    turnFrame.grid(row=0, column=0)
+    turnFrame.grid(row=0, column=0, sticky='N')
     turnFrame.columnconfigure(0, weight=1)
     turnFrame.rowconfigure(0, weight=1)
 
@@ -63,7 +63,7 @@ def countdown():
     # Countdown Frame
     # it is here because of the variable. (I think?)
     countdownFrame = ttk.Frame(root, padding=PADDING)
-    countdownFrame.grid(row=1, column=0)
+    countdownFrame.grid(row=0, column=0)
     countdownFrame.columnconfigure(0, weight=1)
     countdownFrame.rowconfigure(0, weight=1)
 
@@ -197,6 +197,7 @@ def countdown():
             messageLabel = ttk.Label(
                 messageFrame,
                 text="Bravo à tous !\n\nFélicitation aux survivants !\n\nÀ l'année prochaine !",
+                justify=tk.CENTER,
                 font=MESSAGE_FONT,
                 background=BACKGROUND,
                 foreground=FOREGROUND,
